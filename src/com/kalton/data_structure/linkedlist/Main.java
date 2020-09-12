@@ -1,6 +1,9 @@
 package com.kalton.data_structure.linkedlist;
 
 import com.kalton.data_structure.dynamic_array.DynamicArray;
+import com.kalton.data_structure.linkedlist.circle.Both_CircleLinkedList;
+import com.kalton.data_structure.linkedlist.circle.CircleLinkedList;
+import com.kalton.data_structure.linkedlist.circle.Intensify_Both_CircleLinkedList;
 import com.kalton.data_structure.list.List;
 import com.kalton.data_structure.util.Asserts;
 
@@ -36,10 +39,31 @@ public class Main {
         System.out.println(list);
     }
 
+    //约瑟夫问题测试
+    static void josephus() {
+        Intensify_Both_CircleLinkedList<Integer> list = new Intensify_Both_CircleLinkedList<>();
+        for (int i = 1; i <= 8; i++) {
+            list.add(i);
+        }
+
+        // 指向头结点（指向1）
+        list.reset();
+
+        while (!list.isEmpty()) {
+            list.next();
+            list.next();
+            System.out.println(list.remove());
+        }
+    }
+
     public static void main(String[] args) {
         testList(new DynamicArray<>());
         testList(new LinkedList<>());
         testList(new Virtual_LinkedList<>());
         testList(new Both_LinkedList<>());
+        testList(new CircleLinkedList<>());
+        testList(new Both_CircleLinkedList<>());
+
+        josephus();
     }
 }
