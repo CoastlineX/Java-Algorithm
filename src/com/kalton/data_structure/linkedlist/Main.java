@@ -40,5 +40,6 @@ public class Main {
         testList(new DynamicArray<>());
         testList(new LinkedList<>());
         testList(new Virtual_LinkedList<>());
+        testList(new Both_LinkedList<>());
     }
 }
