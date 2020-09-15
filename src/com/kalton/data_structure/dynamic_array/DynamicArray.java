@@ -9,6 +9,7 @@ import com.kalton.data_structure.list.AbstractList;
  * @author 衍方
  * @date 2020/8/31 - 15:40
  */
+@SuppressWarnings("unchecked")
 public class DynamicArray<E> extends AbstractList<E> {
 
     /**
@@ -25,6 +26,11 @@ public class DynamicArray<E> extends AbstractList<E> {
      */
     public DynamicArray(int capacity) {
 
+        //初始化数组长度，不允许传入的长度为负数
+        if (capacity < 0){
+            throw new IllegalArgumentException("初始化容量: "+
+                    capacity + " | " + "error -> capacity不能小于0" );
+        }
         capacity = Math.max(capacity, DEFAULT_CAPACITY);
         //通过new Object[]，动态数组可以实现多对象化
         elements = (E[]) new Object[capacity];
