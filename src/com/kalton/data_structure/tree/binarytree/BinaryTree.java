@@ -23,10 +23,10 @@ public class BinaryTree<E> {
      * @param <E>
      */
     protected static class Node<E>{
-        E element;
-        Node<E> left;
-        Node<E> right;
-        Node<E> parent;
+        public E element;
+        public Node<E> left;
+        public Node<E> right;
+        public Node<E> parent;
 
         /**
          * 构造函数，添加节点时，要指定元素
@@ -71,7 +71,7 @@ public class BinaryTree<E> {
          * @param element
          * @return 如果返回true，结束遍历
          */
-        abstract boolean visit(E element);
+        protected abstract boolean visit(E element);
     }
 
     /**
@@ -282,7 +282,7 @@ public class BinaryTree<E> {
     public void preorder(){
         preorder(new Visitor<E>() {
             @Override
-            boolean visit(E element) {
+            protected boolean visit(E element) {
                 System.out.print(element + " ");
                 return false;
             }
@@ -353,7 +353,7 @@ public class BinaryTree<E> {
     public void inorder(){
         inorder(new Visitor<E>() {
             @Override
-            boolean visit(E element) {
+            protected boolean visit(E element) {
                 System.out.print(element + " ");
                 return false;
             }
@@ -419,7 +419,7 @@ public class BinaryTree<E> {
     public void postorder(){
         postorder(new Visitor<E>() {
             @Override
-            boolean visit(E element) {
+            protected boolean visit(E element) {
                 System.out.print(element + " ");
                 return false;
             }
@@ -497,7 +497,7 @@ public class BinaryTree<E> {
 
         levelOrder(new Visitor<E>() {
             @Override
-            boolean visit(E element) {
+            protected boolean visit(E element) {
                 System.out.print(element + " ");
                 return false;
             }
