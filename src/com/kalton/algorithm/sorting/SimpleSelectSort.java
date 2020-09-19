@@ -56,9 +56,9 @@ public class SimpleSelectSort {
         //默认指向无序列表终点
         right = arr.length - 1;
         //记录每轮找到的最小值的下标
-        int min = left;
+        int min;
         //记录每轮找到的最大值的下标
-        int max = right;
+        int max;
         //当right >= left时，列表已经有序
         //记录循环的次数
         int index = 0;
@@ -67,10 +67,10 @@ public class SimpleSelectSort {
             max = right;    //每轮开始前，默认无序列表终点为最大值
             //指针i从左往右扫描，找出最小值，最大值
             for (int i=left; i<=right; i++) {
-                if (arr[i]<arr[min]) {
+                if (arr[i] <= arr[min]) {
                     min = i;    //通过比较，记录最小值的下标
                 }
-                if(arr[i]>arr[max]) {
+                if(arr[i] >= arr[max]) {
                     max = i;    //通过比较，记录最大值的下标
                 }
             }
