@@ -1,4 +1,4 @@
-package com.kalton.data_structure.tree.bst;
+package com.kalton.data_structure.tree.avl;
 
 import com.kalton.data_structure.tree.binarytree.BinaryTree;
 
@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 /**
  *
- * 二叉搜索树
+ * AVL树基类 —— 二叉搜索树，copy，防止原代码修改，造成阅读干扰
  * @author 衍方
  * @desc
  * @date 2020/9/15 - 15:15
@@ -66,8 +66,11 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
 
         //空树，添加第一个节点
         if (root == null){
-            root = new Node<>(element,null);
+            root = createNode(element,null);
             size++;
+
+            // 新增节点后续处理
+            afterAdd(root);
             return;
         }
 
@@ -96,13 +99,26 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
          }
 
          //插入新节点
-         Node<E> newNode = new Node<>(element,parent);
+         Node<E> newNode = createNode(element,parent);
          if (cmp > 0){
             parent.right = newNode;
          }else {
              parent.left = newNode;
          }
          size++;
+
+        // 新增节点后续处理
+        afterAdd(newNode);
+
+    }
+
+    /**
+     * 用于AVL树节点添加导致失衡的后续操作
+     *
+     * @param node
+     */
+    protected void afterAdd(Node<E> node) {
+
     }
 
     /**
@@ -130,7 +146,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             node.element = s.element;
             // 删除后继节点
             node = s;
-        }
+        } 
 
         // 删除node节点（node的度必然是1或者0）
         Node<E> replacement = node.left != null ? node.left : node.right;
