@@ -23,6 +23,7 @@ public class BinaryTree<E> {
      * @param <E>
      */
     protected static class Node<E>{
+
         public E element;
         public Node<E> left;
         public Node<E> right;
@@ -55,6 +56,17 @@ public class BinaryTree<E> {
         public boolean hasTwoChildren() {
             return left != null && right != null;
         }
+    }
+
+    /**
+     * 扩展方法，由继承Node类的子类进行重写
+     * 然后根据具体继承的子类创建，如AVLNode
+     * @param element
+     * @param parent
+     * @return
+     */
+    protected Node<E> createNode(E element,Node<E> parent){
+        return new Node<>(element,parent);
     }
 
     /**
