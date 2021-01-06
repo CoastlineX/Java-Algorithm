@@ -10,7 +10,6 @@ import java.util.Comparator;
  */
 public class AVLTree<E> extends BinarySearchTree<E> {
 
-
     /**
      * 无参构造
      */
@@ -34,7 +33,7 @@ public class AVLTree<E> extends BinarySearchTree<E> {
     public static class AVLNode<E> extends Node<E>{
 
         // 存储结点高度，维护平衡因子
-        int height;
+        int height = 1;
 
         /**
          * 构造函数，添加节点时，要指定元素
@@ -58,6 +57,22 @@ public class AVLTree<E> extends BinarySearchTree<E> {
             int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
             return leftHeight - rightHeight;
         }
+
+        /**
+         * 更新节点的高度
+         */
+        public void updateHeight(){
+            int leftHeight = left == null ? 0 : ((AVLNode<E>)left).height;
+            int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
+            height = 1 + Math.max(leftHeight,rightHeight);
+        }
+    }
+
+    /**
+     * 更新节点的高度
+     */
+    private void updateHeight(Node<E> node){
+        ((AVLNode<E>)node).updateHeight();
     }
 
     /**
@@ -65,9 +80,17 @@ public class AVLTree<E> extends BinarySearchTree<E> {
      * @param node
      * @return
      */
-    public boolean isBalanced(Node<E> node){
+    private boolean isBalanced(Node<E> node){
 
         return Math.abs(((AVLNode<E>)node).balanceFactor()) <= 1;
+
+    }
+
+    /**
+     * 恢复平衡,node是高度最低的失衡点
+     * @param grand
+     */
+    private void reBalance(Node<E> grand){
 
     }
 
@@ -82,14 +105,21 @@ public class AVLTree<E> extends BinarySearchTree<E> {
         return new AVLNode<>(element,parent);
     }
 
-
-
     /**
      * 添加节点失衡处理
      * @param node
      */
     @Override
     protected void afterAdd(Node<E> node) {
-        super.afterAdd(node);
+        while ((node = node.parent) != null){
+            if (isBalanced(node)){
+                // 更新高度
+                updateHeight(node);
+            }else {
+                // 恢复平衡,node是高度最低的失衡点
+                reBalance(node);
+                break;
+            }
+        }
     }
 }
