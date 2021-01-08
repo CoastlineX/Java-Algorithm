@@ -66,6 +66,20 @@ public class AVLTree<E> extends BinarySearchTree<E> {
             int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
             height = 1 + Math.max(leftHeight,rightHeight);
         }
+
+        public Node<E> tallerChild(){
+            int leftHeight = left == null ? 0 : ((AVLNode<E>)left).height;
+            int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
+
+            if (leftHeight > rightHeight){
+                return left;
+            }else if (leftHeight < rightHeight){
+                return right;
+            }else {
+                // 高度相等时，返回与父节点同方向的节点
+                return isLeftChild() ? left : right;
+            }
+        }
     }
 
     /**
@@ -74,6 +88,8 @@ public class AVLTree<E> extends BinarySearchTree<E> {
     private void updateHeight(Node<E> node){
         ((AVLNode<E>)node).updateHeight();
     }
+
+
 
     /**
      * 判断节点是否失衡
@@ -87,10 +103,51 @@ public class AVLTree<E> extends BinarySearchTree<E> {
     }
 
     /**
-     * 恢复平衡,node是高度最低的失衡点
+     * 恢复平衡,grand是高度最低的失衡点
      * @param grand
      */
     private void reBalance(Node<E> grand){
+
+        // parent是grand节点的左右节点中高度较高的那个
+        Node<E> parent = ((AVLNode<E>)grand).tallerChild();
+
+        // node是parent节点的左右节点中高度较高的那个
+        Node<E> node = ((AVLNode<E>)parent).tallerChild();
+
+        // 判断是LL,RR,LR,RL四种失衡模型
+        if (parent.isLeftChild()){
+
+            if (node.isLeftChild()){      // LL
+                rightRotated(grand);
+            }else {      // LR
+                leftRotated(parent);
+                rightRotated(grand);
+            }
+        }else {
+
+            if (node.isLeftChild()){      // RL
+                rightRotated(parent);
+                leftRotated(grand);
+            }else {      // RR
+                leftRotated(grand);
+            }
+        }
+    }
+
+
+    /**
+     * 左旋转
+     * @param node
+     */
+    private void leftRotated(Node<E> node){
+
+    }
+
+    /**
+     * 右旋转
+     * @param node
+     */
+    private void rightRotated(Node<E> node){
 
     }
 
