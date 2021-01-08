@@ -56,6 +56,22 @@ public class BinaryTree<E> {
         public boolean hasTwoChildren() {
             return left != null && right != null;
         }
+
+        /**
+         * 判断自身是否为左子节点
+         * @return
+         */
+        public boolean isLeftChild(){
+            return parent != null && this == parent.left;
+        }
+
+        /**
+         * 判断自身是否为右子节点
+         * @return
+         */
+        public boolean isRightChild(){
+            return parent != null && this == parent.right;
+        }
     }
 
     /**
