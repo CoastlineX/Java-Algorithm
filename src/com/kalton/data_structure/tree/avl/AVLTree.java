@@ -37,7 +37,7 @@ public class AVLTree<E> extends BinarySearchTree<E> {
 
         /**
          * 构造函数，添加节点时，要指定元素
-         * 父节点的，但不一定有左右子节点
+         * 的父节点，但不一定有左右子节点
          *
          * @param element
          * @param parent
@@ -295,7 +295,7 @@ public class AVLTree<E> extends BinarySearchTree<E> {
     }
 
     /**
-     * 添加节点失衡处理
+     * 添加节点导致的失衡处理
      * @param node
      */
     @Override
