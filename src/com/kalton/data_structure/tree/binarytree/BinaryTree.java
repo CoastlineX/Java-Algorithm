@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * TODO
+ *
  * 二叉树 —— 基类
  * @author 衍方
  * @desc
@@ -71,6 +71,29 @@ public class BinaryTree<E> {
          */
         public boolean isRightChild(){
             return parent != null && this == parent.right;
+        }
+
+        /**
+         * 返回当前节点的兄弟节点
+         * @return
+         */
+        public Node<E> sibling(){
+            if (isLeftChild()){
+                return parent.right;
+            }
+
+            if (isRightChild()){
+                return parent.left;
+            }
+            return null;
+        }
+
+        /**
+         * 返回当前节点的叔父节点
+         * @return
+         */
+        public Node<E> uncle(){
+            return parent.sibling();
         }
     }
 
