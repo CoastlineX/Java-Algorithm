@@ -11,15 +11,15 @@ import com.kalton.data_structure.tree.bst.BinarySearchTree;
  */
 public class Main {
 
-    //数据源
+    // 数据源
     static int[] data = {85,19,69,3,7,99,95,2,1,70,44,58,11,21,14,93,57,4,56};
-    //static int[] data = {67, 52, 92, 96, 53, 95, 13, 63, 34, 82, 76, 54, 9, 68, 39};
+    // static int[] data = {67, 52, 92, 96, 53, 95, 13, 63, 34, 82, 76, 54, 9, 68, 39};
 
     // 未平衡的二叉搜索树
     static void test1(){
 
         BinarySearchTree<Integer> bSTree = new BinarySearchTree<>();
-        //测试添加
+        // 测试添加
         for (int i:data) {
             bSTree.add(i);
         }
@@ -34,7 +34,7 @@ public class Main {
     static void test2(){
 
         AVLTree<Integer> avlTree = new AVLTree<>();
-        //测试添加
+        // 测试添加
         for (int i:data) {
             avlTree.add(i);
         }

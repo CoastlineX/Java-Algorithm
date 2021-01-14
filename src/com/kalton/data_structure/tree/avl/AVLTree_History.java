@@ -343,7 +343,7 @@ public class AVLTree_History<E> extends BinarySearchTree<E> {
         return sb.toString();
     }
 
-    //中序遍历，树状打印二叉树
+    // 中序遍历，树状打印二叉树
     private void toString(Node<E> node, StringBuilder sb, String prefix){
         if (node == null) return;
 
