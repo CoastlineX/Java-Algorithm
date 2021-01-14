@@ -15,7 +15,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
 
     // 定义红黑树节点颜色常量
     private static final boolean RED = false;
-    private static final boolean BLACK = false;
+    private static final boolean BLACK = true;
 
     /**
      * 无参构造
@@ -52,6 +52,30 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
         public RBNode(E element, Node<E> parent) {
             super(element, parent);
         }
+
+        /**
+         * 重写红黑树节点显示
+         * @return
+         */
+        @Override
+        public String toString() {
+            String str = "";
+            if (color == RED) {
+                str = "R_";
+            }
+            return str + element.toString();
+        }
+    }
+
+    /**
+     * 重写创建节点方法，创建红黑树节点
+     * @param element
+     * @param parent
+     * @return
+     */
+    @Override
+    protected Node<E> createNode(E element, Node<E> parent) {
+        return new RBNode<>(element, parent);
     }
 
     /**
@@ -121,7 +145,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
         // 按照 红黑红，红黑，黑红，黑;四种模型共有12种添加情况
         Node<E> parent = node.parent;
 
-        // 没有父节点，添加的是root
+        // 没有父节点，添加的是root或上溢到根节点
         if (parent == null) {
             black(node);
             return;
@@ -132,20 +156,41 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
 
         // 父节点为red,8种情况，分两种类型
         Node<E> uncle = node.uncle();
-        Node<E> grand = parent.parent;
+        // 先将祖父节点染红
+        Node<E> grand = red(parent.parent);
         // 1、叔父节点为red,发生上溢
         if (isRed(uncle)){
             // 父节点与叔父节点染黑
             black(parent);
             black(uncle);
             // 祖父节点染红，当做新节点添加
-            red(grand);
             afterAdd(grand);
             return;
         }
 
         // 2、叔父节点为black,需要旋转
-
+        // 共有LL,RR,LR,RL四种失衡模型
+        if (parent.isLeftChild()){
+            if (node.isLeftChild()){      // LL
+                // 将父节点染黑，祖父节点染红
+                black(parent);
+            }else {      // LR
+                // 将自己染黑，祖父节点染红
+                black(node);
+                leftRotated(parent);
+            }
+            rightRotated(grand);
+        }else {
+            if (node.isLeftChild()){      // RL
+                // 将自己染黑，祖父节点染红
+                black(node);
+                rightRotated(parent);
+            }else {      // RR
+                // 将父节点染黑，祖父节点染红
+                black(parent);
+            }
+            leftRotated(grand);
+        }
 
     }
 
@@ -157,4 +202,29 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
     protected void afterRemove(Node<E> node) {
         super.afterRemove(node);
     }
+
+    /**
+     * 树状打印红黑树
+     * @return
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        toString((RBNode<E>) root,sb,"");
+        return sb.toString();
+    }
+
+    // 中序遍历，树状打印二叉树
+    private void toString(RBNode<E> node, StringBuilder sb, String prefix){
+        if (node == null) return;
+
+        toString((RBNode<E>) node.left,sb,prefix + "L->");
+        if (node.color == RED) {
+            sb.append(prefix).append("红").append(node.element).append("\n");
+        }else {
+            sb.append(prefix).append(node.element).append("\n");
+        }
+        toString((RBNode<E>) node.right,sb,prefix + "R->");
+    }
+
 }
