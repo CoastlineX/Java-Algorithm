@@ -3,11 +3,11 @@ package com.kalton.data_structure.linkedlist.circle;
 import com.kalton.data_structure.list.AbstractList;
 
 /**
- * TODO
- * 单向循环链表
+ * 数据结构 - 单向循环链表
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/12 - 0:49
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class CircleLinkedList<E> extends AbstractList<E> {
 
@@ -64,7 +64,7 @@ public class CircleLinkedList<E> extends AbstractList<E> {
      */
     @Override
     public int indexOf(E element) {
-        //如果元素为空
+        // 如果元素为空
         if (element == null){
             Node<E> node = first;
             for (int i = 0;i < size;i++){
@@ -72,14 +72,14 @@ public class CircleLinkedList<E> extends AbstractList<E> {
                 node = node.next;
             }
         }else {
-            //元素不为空
+            // 元素不为空
             Node<E> node = first;
             for (int i = 0;i < size;i++){
                 if (element.equals(node.element)) return i;
                 node = node.next;
             }
         }
-        //查无此元素
+        // 查无此元素
         return ELEMENT_NOT_FOUND;
     }
 
@@ -94,7 +94,7 @@ public class CircleLinkedList<E> extends AbstractList<E> {
         rangeCheckForAdd(index);
 
         if (index == 0) {
-            //先生成结点。但是first不指向它，等node（）找到后再指向
+            // 先生成结点。但是first不指向它，等node（）找到后再指向
             Node<E> newFirst = new Node<>(element, first);
             // 拿到最后一个节点
             Node<E> last = (size == 0) ? newFirst : node(size - 1);

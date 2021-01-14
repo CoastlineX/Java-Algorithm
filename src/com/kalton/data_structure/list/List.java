@@ -1,14 +1,15 @@
 package com.kalton.data_structure.list;
 
 /**
- * TODO
  * 公共方法接口
+ *
  * @author 衍方
  * @date 2020/8/31 - 22:54
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public interface List<E> {
 
-    //查无元素的返回标志
+    // 查无元素的返回标志
     int ELEMENT_NOT_FOUND = -1;
 
     /**

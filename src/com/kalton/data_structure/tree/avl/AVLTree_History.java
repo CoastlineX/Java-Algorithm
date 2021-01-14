@@ -1,21 +1,22 @@
 package com.kalton.data_structure.tree.avl;
-import com.kalton.data_structure.tree.bbst.BalancedBinaryTree;
+
+import com.kalton.data_structure.tree.bbst.BinarySearchTree;
 
 import java.util.Comparator;
 
 /**
- * 平衡二叉树 —— AVL树
+ * 平衡二叉树 —— 重构前的AVL树
  *
  * @author 衍方
- * @date 2021/1/4 - 11:05
+ * @date 2021/1/14 - 16:20
  * @link https://github.com/kaltons/Java-Algorithm
  */
-public class AVLTree<E> extends BalancedBinaryTree<E> {
+public class AVLTree_History<E> extends BinarySearchTree<E> {
 
     /**
      * 无参构造
      */
-    public AVLTree() {
+    public AVLTree_History() {
         this(null);
     }
 
@@ -23,7 +24,7 @@ public class AVLTree<E> extends BalancedBinaryTree<E> {
      * 带参构造
      * @param comparator
      */
-    public AVLTree(Comparator<E> comparator) {
+    public AVLTree_History(Comparator<E> comparator) {
         super(comparator);
     }
 
@@ -141,6 +142,42 @@ public class AVLTree<E> extends BalancedBinaryTree<E> {
     }
 
     /**
+     * 左旋转 -- 以RR模型图编写
+     * @param grand
+     */
+    private void leftRotated(Node<E> grand){
+
+        // 记录当前grand节点的右子树
+        Node<E> parent = grand.right;
+        Node<E> child = parent.left;
+        // 将parent的左子树作为grand的右子树
+        grand.right = child;
+        // 将grand作为parent的左子树
+        parent.left = grand;
+
+        // 更新节点的父节点及高度
+        afterRotated(grand,parent,child);
+    }
+
+    /**
+     * 右旋转 -- 以LL模型图编写
+     * @param grand
+     */
+    private void rightRotated(Node<E> grand){
+
+        // 记录当前grand节点的右子树
+        Node<E> parent = grand.left;
+        Node<E> child = parent.right;
+        // 将parent的右子树作为grand的左子树
+        grand.left = child;
+        // 将grand作为parent的右子树
+        parent.right = grand;
+
+        // 更新节点的父节点及高度
+        afterRotated(grand,parent,child);
+    }
+
+    /**
      * 统一操作，恢复平衡,grand是高度最低的失衡点
      * @param grand
      */
@@ -172,7 +209,6 @@ public class AVLTree<E> extends BalancedBinaryTree<E> {
 
     /**
      * 统一旋转，不区分LL,RR,LR,RL
-     * 旋转后，更新高度
      * @param r
      * @param b
      * @param c
@@ -180,11 +216,40 @@ public class AVLTree<E> extends BalancedBinaryTree<E> {
      * @param e
      * @param f
      */
-    @Override
-    protected void unifyRotated(Node<E> r, Node<E> b, Node<E> c, Node<E> d, Node<E> e, Node<E> f) {
-        super.unifyRotated(r, b, c, d, e, f);
+    private void unifyRotated(
+            Node<E> r, // 子树的原根节点
+            Node<E> b, Node<E> c,
+            Node<E> d,
+            Node<E> e, Node<E> f) {
+        // 让d成为这棵子树新的根节点
+        d.parent = r.parent;
+        if (r.isLeftChild()) {
+            r.parent.left = d;
+        } else if (r.isRightChild()) {
+            r.parent.right = d;
+        } else {
+            root = d;
+        }
+
+        //b-c
+        b.right = c;
+        if (c != null) {
+            c.parent = b;
+        }
         updateHeight(b);
+
+        // e-f
+        f.left = e;
+        if (e != null) {
+            e.parent = f;
+        }
         updateHeight(f);
+
+        // b-d-f
+        d.left = b;
+        d.right = f;
+        b.parent = d;
+        f.parent = d;
         updateHeight(d);
     }
 
@@ -194,9 +259,28 @@ public class AVLTree<E> extends BalancedBinaryTree<E> {
      * @param parent
      * @param child
      */
-    @Override
-    protected void afterRotated(Node<E> grand, Node<E> parent, Node<E> child) {
-        super.afterRotated(grand, parent, child);
+    private void afterRotated(Node<E> grand,Node<E> parent,Node<E> child){
+
+        // 更新parent节点的父节点
+        parent.parent = grand.parent;
+        // 让parent成为字树的根节点
+        if (grand.isLeftChild()){
+            grand.parent.left = parent;
+        }else if (grand.isRightChild()){
+            grand.parent.right = parent;
+        }else {
+            // grand是root节点
+            root = parent;
+        }
+
+        // 更新child节点的父节点
+        if (child != null){
+            child.parent = grand;
+        }
+
+        // 更新grand节点的父节点
+        grand.parent = parent;
+
         // 自底向上更新节点高度
         updateHeight(grand);
         updateHeight(parent);

@@ -1,10 +1,11 @@
 package com.kalton.data_structure.list;
 
 /**
- * TODO
  * 抽象父类
+ *
  * @author 衍方
  * @date 2020/8/31 - 22:52
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public abstract class AbstractList<E> implements List<E>  {
     /**
@@ -68,7 +69,7 @@ public abstract class AbstractList<E> implements List<E>  {
      * @param index
      */
     protected void rangeCheckForAdd(int index) {
-        //index > size,元素可以添加在数组size位置，即数组尾部下一存储单元
+        // index > size,元素可以添加在数组size位置，即数组尾部下一存储单元
         if (index < 0 || index > size) {
             outOfBounds(index);
         }

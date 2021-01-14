@@ -3,10 +3,11 @@ package com.kalton.data_structure.linkedlist.circle;
 import com.kalton.data_structure.list.AbstractList;
 
 /**
- * TODO
- * 双向循环链表
+ * 数据结构 - 双向循环链表
+ *
  * @author 衍方
  * @date 2020/8/31 - 22:14
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Both_CircleLinkedList<E> extends AbstractList<E> {
 
@@ -70,7 +71,7 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
      */
     @Override
     public int indexOf(E element) {
-        //如果元素为空
+        // 如果元素为空
         if (element == null){
             Node<E> node = first;
             for (int i = 0;i < size;i++){
@@ -78,14 +79,14 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
                 node = node.next;
             }
         }else {
-            //元素不为空
+            // 元素不为空
             Node<E> node = first;
             for (int i = 0;i < size;i++){
                 if (element.equals(node.element)) return i;
                 node = node.next;
             }
         }
-        //查无此元素
+        // 查无此元素
         return ELEMENT_NOT_FOUND;
     }
 
@@ -99,11 +100,11 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
     public void add(int index, E element) {
         rangeCheckForAdd(index);
 
-        //往最后面添加元素
+        // 往最后面添加元素
         if (index == size) {
             Node<E> oldLast = last;
             last = new Node<>(oldLast, element, first);
-            //这是链表添加的第一个元素
+            // 这是链表添加的第一个元素
             if (oldLast == null) {
                 first = last;
                 first.next = first;
@@ -118,7 +119,7 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
             Node<E> node = new Node<>(prev, element, next);
             next.prev = node;
             prev.next = node;
-            //index == 0，往最前面添加
+            // index == 0，往最前面添加
             if (index == 0) {
                 first = node;
             }
@@ -189,7 +190,7 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
     private Node<E> node(int index){
         rangeCheck(index);
 
-        //如果查找的元素在链表前半部分
+        // 如果查找的元素在链表前半部分
         if (index < (size >> 1)) {
             Node<E> node = first;
             for (int i = 0; i < index; i++) {
@@ -197,7 +198,7 @@ public class Both_CircleLinkedList<E> extends AbstractList<E> {
             }
             return node;
         } else {
-        //如果查找的元素在链表后半部分
+        // 如果查找的元素在链表后半部分
             Node<E> node = last;
             for (int i = size - 1; i > index; i--) {
                 node = node.prev;

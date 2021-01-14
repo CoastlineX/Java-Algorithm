@@ -4,10 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * TODO
  * 时间测试工具类
+ *
  * @author MJ
  * @date 2020/8/31 - 15:39
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Times {
 	private static final SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.SSS");

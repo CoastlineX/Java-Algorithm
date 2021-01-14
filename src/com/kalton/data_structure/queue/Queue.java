@@ -1,19 +1,18 @@
 package com.kalton.data_structure.queue;
 
-
 import com.kalton.data_structure.linkedlist.Both_LinkedList;
 import com.kalton.data_structure.list.List;
 
 /**
- * TODO
  * 数据结构 - 队列
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/13 - 12:05
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Queue<E> {
 
-	//利用双向链表封装好的方法实现队列
+	// 利用双向链表封装好的方法实现队列
 	private List<E> list = new Both_LinkedList<>();
 
 	/**

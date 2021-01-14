@@ -3,10 +3,11 @@ package com.kalton.data_structure.linkedlist;
 import com.kalton.data_structure.list.AbstractList;
 
 /**
- * TODO
- * 带虚拟头结点的链表
+ * 数据结构 - 带虚拟头结点的链表
+ *
  * @author 衍方
  * @date 2020/9/5 - 13:33
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Virtual_LinkedList<E> extends AbstractList<E> {
 
@@ -70,7 +71,7 @@ public class Virtual_LinkedList<E> extends AbstractList<E> {
      */
     @Override
     public int indexOf(E element) {
-        //如果元素为空
+        // 如果元素为空
         if (element == null){
             Node<E> node = first.next;
             for (int i = 0;i < size;i++){
@@ -78,14 +79,14 @@ public class Virtual_LinkedList<E> extends AbstractList<E> {
                 node = node.next;
             }
         }else {
-            //元素不为空
+            // 元素不为空
             Node<E> node = first.next;
             for (int i = 0;i < size;i++){
                 if (element.equals(node.element)) return i;
                 node = node.next;
             }
         }
-        //查无此元素
+        // 查无此元素
         return ELEMENT_NOT_FOUND;
     }
 
