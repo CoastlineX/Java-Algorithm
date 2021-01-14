@@ -3,11 +3,11 @@ package com.kalton.data_structure.linkedlist.circle;
 import com.kalton.data_structure.list.AbstractList;
 
 /**
- * TODO
  * 增强双向循环链表，用于解决约瑟夫问题
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/12 - 0:49
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Intensify_Both_CircleLinkedList<E> extends AbstractList<E> {
 	private Node<E> first;
@@ -129,7 +129,7 @@ public class Intensify_Both_CircleLinkedList<E> extends AbstractList<E> {
 		return remove(node(index));
 	}
 
-	//改为private E remove(Node<E> node)
+	// 改为private E remove(Node<E> node)
 	public E remove(E element) {
 		return null;
 	}

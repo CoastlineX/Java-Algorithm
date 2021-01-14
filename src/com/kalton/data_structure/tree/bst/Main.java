@@ -3,8 +3,8 @@ package com.kalton.data_structure.tree.bst;
 import com.kalton.data_structure.tree.binarytree.BinaryTree;
 
 /**
- *
  * 二叉搜索树 —— 测试类
+ *
  * @author 衍方
  * @desc
  * @date 2020/9/18 - 23:06

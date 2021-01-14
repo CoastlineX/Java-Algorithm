@@ -3,8 +3,8 @@ package com.kalton.data_structure.tree.avl;
 import com.kalton.data_structure.tree.bst.BinarySearchTree;
 
 /**
- *
  * AVL树 —— 测试类
+ *
  * @author 衍方
  * @date 2021/1/4 - 11:05
  * @link https://github.com/kaltons/Java-Algorithm

@@ -1,15 +1,17 @@
 package com.kalton.data_structure.tree.rbt;
 
+import com.kalton.data_structure.tree.bbst.BalancedBinaryTree;
+
 import java.util.Comparator;
 
 /**
+ * 平衡二叉树 —— 红黑树
  *
- * 平衡二叉树 —— AVL树
  * @author 衍方
  * @date 2021/1/13 - 10:56
  * @link https://github.com/kaltons/Java-Algorithm
  */
-public class RedBlackTree<E> extends BinarySearchTree<E> {
+public class RedBlackTree<E> extends BalancedBinaryTree<E> {
 
     // 定义红黑树节点颜色常量
     private static final boolean RED = false;
@@ -116,7 +118,35 @@ public class RedBlackTree<E> extends BinarySearchTree<E> {
      */
     @Override
     protected void afterAdd(Node<E> node) {
-        super.afterAdd(node);
+        // 按照 红黑红，红黑，黑红，黑;四种模型共有12种添加情况
+        Node<E> parent = node.parent;
+
+        // 没有父节点，添加的是root
+        if (parent == null) {
+            black(node);
+            return;
+        }
+
+        // 父节点为black,直接添加，不造成影响
+        if (isBlack(parent)) return;
+
+        // 父节点为red,8种情况，分两种类型
+        Node<E> uncle = node.uncle();
+        Node<E> grand = parent.parent;
+        // 1、叔父节点为red,发生上溢
+        if (isRed(uncle)){
+            // 父节点与叔父节点染黑
+            black(parent);
+            black(uncle);
+            // 祖父节点染红，当做新节点添加
+            red(grand);
+            afterAdd(grand);
+            return;
+        }
+
+        // 2、叔父节点为black,需要旋转
+
+
     }
 
     /**

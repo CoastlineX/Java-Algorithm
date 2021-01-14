@@ -4,10 +4,11 @@ package com.kalton.data_structure.dynamic_array;
 import com.kalton.data_structure.list.AbstractList;
 
 /**
- * TODO
- * 动态数组
+ * 数据结构 - 动态数组
+ *
  * @author 衍方
  * @date 2020/8/31 - 15:40
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 @SuppressWarnings("unchecked")
 public class DynamicArray<E> extends AbstractList<E> {
@@ -17,7 +18,7 @@ public class DynamicArray<E> extends AbstractList<E> {
      */
     private E[] elements;
 
-    //数组的默认初始化值
+    // 数组的默认初始化值
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
@@ -26,13 +27,13 @@ public class DynamicArray<E> extends AbstractList<E> {
      */
     public DynamicArray(int capacity) {
 
-        //初始化数组长度，不允许传入的长度为负数
+        // 初始化数组长度，不允许传入的长度为负数
         if (capacity < 0){
             throw new IllegalArgumentException("初始化容量: "+
                     capacity + " | " + "error -> capacity不能小于0" );
         }
         capacity = Math.max(capacity, DEFAULT_CAPACITY);
-        //通过new Object[]，动态数组可以实现多对象化
+        // 通过new Object[]，动态数组可以实现多对象化
         elements = (E[]) new Object[capacity];
     }
 
@@ -73,18 +74,18 @@ public class DynamicArray<E> extends AbstractList<E> {
      * @return
      */
     public int indexOf(E element){
-        //如果元素为空
+        // 如果元素为空
         if (element == null){
             for (int i = 0;i < size;i++){
                 if (elements[i] == null) return i;
             }
         }else {
-        //元素不为空
+        // 元素不为空
             for (int i = 0;i < size;i++){
                 if (element.equals(elements[i])) return i;
             }
         }
-        //查无此元素
+        // 查无此元素
         return ELEMENT_NOT_FOUND;
     }
 
@@ -94,9 +95,9 @@ public class DynamicArray<E> extends AbstractList<E> {
      * @param element
      */
     public void add(int index,E element){
-        //检查索引是否合法
+        // 检查索引是否合法
         rangeCheckForAdd(index);
-        //检查数组容量是否足够
+        // 检查数组容量是否足够
         ensureCapacity(size + 1);
 
         for (int i = size;i > index;i--){
@@ -112,7 +113,7 @@ public class DynamicArray<E> extends AbstractList<E> {
      * @return
      */
     public E remove(E element){
-        //调用indexOf获取索引，通过索引删除指定元素
+        // 调用indexOf获取索引，通过索引删除指定元素
         return remove(indexOf(element));
     }
 
@@ -128,7 +129,7 @@ public class DynamicArray<E> extends AbstractList<E> {
         for (int i = index + 1;i < size;i++){
             elements[i - 1] = elements[i];
         }
-        //将数组原来尾部最后的元素所在的位置置为null，释放原来地址引用对应的对象内存
+        // 将数组原来尾部最后的元素所在的位置置为null，释放原来地址引用对应的对象内存
         elements[--size] = null;
         return old;
     }
@@ -155,17 +156,17 @@ public class DynamicArray<E> extends AbstractList<E> {
      */
     private void ensureCapacity(int capacity){
         int oldCapacity = elements.length;
-        //如果数组容量足够，reyurn
+        // 如果数组容量足够，reyurn
         if (oldCapacity >= capacity) return;
 
-        //否则的话，数组扩容，数组扩容1.5倍
+        // 否则的话，数组扩容，数组扩容1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         E[] newElements = (E[]) new Object[newCapacity];
-        //将原有数组元素复制到新数组中
+        // 将原有数组元素复制到新数组中
         for (int i = 0;i < size;i++){
             newElements[i] = elements[i];
         }
-        //指向新数组
+        // 指向新数组
         elements = newElements;
         System.out.println(oldCapacity + "扩容为" + newCapacity);
     }
@@ -179,7 +180,7 @@ public class DynamicArray<E> extends AbstractList<E> {
         int oldCapacity = elements.length;
         int newCapacity = oldCapacity >> 1;
 
-        //如果元素的数量大于缩容后数组长度，或者小于初始量，不进行缩容操作
+        // 如果元素的数量大于缩容后数组长度，或者小于初始量，不进行缩容操作
         if (size >= (newCapacity) || size <= DEFAULT_CAPACITY) return;;
 
         // 剩余空间还很多

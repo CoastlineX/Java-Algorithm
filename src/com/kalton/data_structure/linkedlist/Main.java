@@ -8,10 +8,11 @@ import com.kalton.data_structure.list.List;
 import com.kalton.data_structure.util.Asserts;
 
 /**
- * TODO
- * 链表测试类
+ * 数据结构 - 链表测试类
+ *
  * @author 衍方
  * @date 2020/9/5 - 13:09
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Main {
 
@@ -39,7 +40,7 @@ public class Main {
         System.out.println(list);
     }
 
-    //约瑟夫问题测试
+    // 约瑟夫问题测试
     static void josephus() {
         Intensify_Both_CircleLinkedList<Integer> list = new Intensify_Both_CircleLinkedList<>();
         for (int i = 1; i <= 8; i++) {
