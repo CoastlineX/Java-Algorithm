@@ -15,6 +15,7 @@ public class BinarySearch {
         int[] arr = {8,11,19,23,27,33,45,55,67,98};
 
         // 变种1,2 测试数据
+
         int[] arr1 = {1,3,4,5,6,8,8,8,11,18};
 
         int[] arr2 = {3,4,6,7,10};
@@ -40,6 +41,7 @@ public class BinarySearch {
      * @return
      */
     public static int bSerachByIteration(int[] arr, int  value) {
+
         // 头部指针
         int low = 0;
         // 尾部指针
