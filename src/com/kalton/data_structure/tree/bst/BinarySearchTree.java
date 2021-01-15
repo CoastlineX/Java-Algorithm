@@ -122,7 +122,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
         if (node == null) return;
 
         size--;
-        // 删除度为2的节点，实际上是转化为删除度俄日1或者0node节点
+        // 删除度为2的节点，实际上是转化为删除度为1或者0的节点
         if (node.hasTwoChildren()) {
             // 找到后继节点
             Node<E> s = successor(node);

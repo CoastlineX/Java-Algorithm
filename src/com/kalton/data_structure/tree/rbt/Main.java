@@ -9,11 +9,13 @@ package com.kalton.data_structure.tree.rbt;
  */
 public class Main {
 
-    static void test1(){
+    // 数据源
+    static Integer[] data = new Integer[] {
+            55, 87, 56, 74, 96, 22, 62, 20, 70, 68, 90, 50
+    };
 
-        Integer[] data = new Integer[] {
-                55, 87, 56, 74, 96, 22, 62, 20, 70, 68, 90, 50
-        };
+    // 添加测试
+    static void test1(){
 
         RedBlackTree<Integer> rb = new RedBlackTree<>();
         for (Integer value : data) {
@@ -25,7 +27,49 @@ public class Main {
         System.out.println(rb);
     }
 
+    // 删除测试
+    static void test2(){
+
+        RedBlackTree<Integer> rb = new RedBlackTree<>();
+        for (Integer value : data) {
+            rb.add(value);
+        }
+
+        System.out.println(rb);
+
+        for (Integer value : data) {
+            rb.remove(value);
+            System.out.println("[" + value + "]");
+            System.out.println(rb);
+            System.out.println("--------------------");
+        }
+    }
+
+    // 历史对比删除测试
+    static void test3(){
+
+        RedBlackTree<Integer> rb = new RedBlackTree<>();
+        RedBlackTree_History<Integer> rbh = new RedBlackTree_History<>();
+        for (Integer value : data) {
+            rb.add(value);
+            rbh.add(value);
+        }
+
+        for (Integer value : data) {
+            rb.remove(value);
+            rbh.remove(value);
+
+            System.out.println("[" + value + "]");
+            System.out.println("---------rb-----------");
+            System.out.println(rb);
+            System.out.println("----------------------");
+            System.out.println(rbh);
+            System.out.println("---------rbh----------");
+        }
+    }
+
     public static void main(String[] args) {
         test1();
+        test2();
     }
 }
