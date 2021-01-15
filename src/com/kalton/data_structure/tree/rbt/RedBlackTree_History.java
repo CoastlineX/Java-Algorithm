@@ -1,17 +1,17 @@
 package com.kalton.data_structure.tree.rbt;
 
-import com.kalton.data_structure.tree.bbst.BalancedBinaryTree;
+import com.kalton.data_structure.tree.bbst.BalancedBinaryTree_History;
 
 import java.util.Comparator;
 
 /**
- * 平衡二叉树 —— 红黑树
+ * 平衡二叉树 —— 红黑树，保留未变更的afterRemove方法
  *
  * @author 衍方
  * @date 2021/1/13 - 10:56
  * @link https://github.com/kaltons/Java-Algorithm
  */
-public class RedBlackTree<E> extends BalancedBinaryTree<E> {
+public class RedBlackTree_History<E> extends BalancedBinaryTree_History<E> {
 
     // 定义红黑树节点颜色常量
     private static final boolean RED = false;
@@ -20,7 +20,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
     /**
      * 无参构造
      */
-    public RedBlackTree() {
+    public RedBlackTree_History() {
         this(null);
     }
 
@@ -28,7 +28,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
      * 带参构造
      * @param comparator
      */
-    public RedBlackTree(Comparator<E> comparator) {
+    public RedBlackTree_History(Comparator<E> comparator) {
         super(comparator);
     }
 
@@ -199,7 +199,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
      * @param node
      */
     @Override
-    protected void afterRemove(Node<E> node) {
+    protected void afterRemove(Node<E> node,Node<E> replacement) {
 
         /*
          * 真正被删除的元素都是叶子节点
@@ -211,9 +211,11 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
          */
 
         // 如果删除的节点是红色
-        // 或者用以取代删除节点的子节点是红色
-        if (isRed(node)){
-            black(node);
+        if (isRed(node)) return;
+
+        // 黑红-红黑,取代的子节点是红色
+        if (isRed(replacement)){
+            black(replacement);
             return;
         }
 
@@ -272,7 +274,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
                 black(parent);
                 // 判断父节点是否为黑色
                 if (parentBlack){
-                    afterRemove(parent);
+                    afterRemove(parent,null);
                 }
 
             }else {
@@ -312,7 +314,7 @@ public class RedBlackTree<E> extends BalancedBinaryTree<E> {
                 black(parent);
                 // 判断父节点是否为黑色
                 if (parentBlack){
-                    afterRemove(parent);
+                    afterRemove(parent,null);
                 }
 
             }else {

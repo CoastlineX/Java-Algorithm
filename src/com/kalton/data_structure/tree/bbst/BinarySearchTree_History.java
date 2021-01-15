@@ -12,7 +12,7 @@ import java.util.Comparator;
  * @date 2020/9/15 - 15:15
  */
 @SuppressWarnings("unchecked")
-public class BinarySearchTree<E> extends BinaryTree<E> {
+public class BinarySearchTree_History<E> extends BinaryTree<E> {
 
     //接收用户自定义比较器
     private final Comparator<E> comparator;
@@ -20,7 +20,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
     /**
      * 无参构造
      */
-    public BinarySearchTree() {
+    public BinarySearchTree_History() {
         this(null);
     }
 
@@ -28,7 +28,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
      * 构造函数
      * @param comparator
      */
-    public BinarySearchTree(Comparator<E> comparator) {
+    public BinarySearchTree_History(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
@@ -163,12 +163,12 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             }
 
             // 平衡二叉树删除节点后续操作
-            afterRemove(replacement);
+            afterRemove(node,replacement);
         } else if (node.parent == null) { // node是叶子节点并且是根节点
             root = null;
 
             // 平衡二叉树删除节点后续操作
-            afterRemove(node);
+            afterRemove(node,null);
         } else { // node是叶子节点，但不是根节点
             if (node == node.parent.left) {
                 node.parent.left = null;
@@ -177,16 +177,16 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             }
 
             // 平衡二叉树删除节点后续操作
-            afterRemove(node);
+            afterRemove(node,null);
         }
     }
 
     /**
      * 用于二叉平衡树节点删除导致失衡的后续操作
      *
-     * @param node 被删除的节点，或者用以取代删除节点(度为1)的子节点
+     * @param node 被删除的节点
      */
-    protected void afterRemove(Node<E> node) {
+    protected void afterRemove(Node<E> node,Node<E> replacement) {
 
     }
 
