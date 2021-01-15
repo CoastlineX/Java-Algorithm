@@ -1,11 +1,11 @@
 package com.kalton.data_structure.stack;
 
 /**
- * TODO
  * 数据结构 - 栈测试类
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/12 - 17:04
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Main {
 

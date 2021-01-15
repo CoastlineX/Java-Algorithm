@@ -1,35 +1,36 @@
 package com.kalton.algorithm.serach;
 
 /**
- * TODO
  * 搜索算法 —— 二分查找
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/14 - 22:24
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class BinarySearch {
 
     public static void main(String[] args) {
 
-        //常规测试数据
+        // 常规测试数据
         int[] arr = {8,11,19,23,27,33,45,55,67,98};
 
-        //变种1,2 测试数据
+        // 变种1,2 测试数据
+
         int[] arr1 = {1,3,4,5,6,8,8,8,11,18};
 
         int[] arr2 = {3,4,6,7,10};
 
-        //常规
+        // 常规
         System.out.println("迭代法 ——> " + bSerachByIteration(arr,19));
         System.out.println("递归法 ——> " + bSerachByRecursive(arr,19));
 
-        //变种一
+        // 变种一
         System.out.println("变种一 ——> " + binarySerach1(arr1,8));
-        //变种二
+        // 变种二
         System.out.println("变种二 ——> " + binarySerach2(arr1,8));
-        //变种三
+        // 变种三
         System.out.println("变种三 ——> " + binarySerach3(arr2,5));
-        //变种四
+        // 变种四
         System.out.println("变种四 ——> " + binarySerach4(arr2,5));
     }
 
@@ -40,9 +41,10 @@ public class BinarySearch {
      * @return
      */
     public static int bSerachByIteration(int[] arr, int  value) {
-        //头部指针
+
+        // 头部指针
         int low = 0;
-        //尾部指针
+        // 尾部指针
         int high = arr.length - 1;
 
         while (low <= high){

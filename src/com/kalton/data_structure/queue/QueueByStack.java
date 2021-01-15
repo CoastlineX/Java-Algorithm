@@ -4,18 +4,18 @@ package com.kalton.data_structure.queue;
 import com.kalton.data_structure.stack.Stack;
 
 /**
- * TODO
- * 使用双栈实现队列
+ * 数据结构 -- 使用双栈实现队列
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/13 - 13:10
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class QueueByStack<E> {
 
-    //定义两个栈，inStack用于队尾入队，outStack用于队头出队
+    // 定义两个栈，inStack用于队尾入队，outStack用于队头出队
     private Stack<E> inStack,outStack;
 
-    //使用构造函数初始化
+    // 使用构造函数初始化
     public QueueByStack() {
         this.inStack = new Stack<>();
         this.outStack = new Stack<>();

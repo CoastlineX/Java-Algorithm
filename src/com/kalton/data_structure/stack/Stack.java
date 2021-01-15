@@ -1,15 +1,21 @@
 package com.kalton.data_structure.stack;
 
-
 import com.kalton.data_structure.dynamic_array.DynamicArray;
 import com.kalton.data_structure.list.List;
 
+/**
+ * 数据结构 -- 栈
+ *
+ * @author 衍方
+ * @date 2020/9/12 - 17:04
+ * @link https://github.com/kaltons/Java-Algorithm
+ */
 public class Stack<E> extends DynamicArray<E> {
 
-	//利用动态数组实现栈
+	// 利用动态数组实现栈
 	private List<E> list = new DynamicArray<>();
 
-	//利用链表实现栈
+	// 利用链表实现栈
 	//private List<E> list = new DynamicArray<>();
 
 	/**

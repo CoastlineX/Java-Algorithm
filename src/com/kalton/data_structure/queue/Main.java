@@ -4,11 +4,11 @@ import com.kalton.data_structure.queue.circle.CircleDeque;
 import com.kalton.data_structure.queue.circle.CircleQueue;
 
 /**
- * TODO
  * 数据结构 - 队列测试类
+ *
  * @author 衍方
- * @desc
  * @date 2020/9/13 - 13:01
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 public class Main {
 

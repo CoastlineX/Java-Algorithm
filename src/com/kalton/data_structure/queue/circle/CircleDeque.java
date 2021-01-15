@@ -1,25 +1,25 @@
 package com.kalton.data_structure.queue.circle;
 
 /**
- * TODO
+ * 数据结构 -- 循环双端队列
  *
  * @author 衍方
- * @desc
  * @date 2020/9/13 - 15:50
+ * @link https://github.com/kaltons/Java-Algorithm
  */
 @SuppressWarnings("unchecked")
 public class CircleDeque<E> {
 
-    //数组的默认初始化值
+    // 数组的默认初始化值
     private static final int DEFAULT_CAPACITY = 10;
 
-    //循环队列队头指针
+    // 循环队列队头指针
     private int front;
 
-    //队列元素数量
+    // 队列元素数量
     private int size;
 
-    //使用顺序结构数组存储
+    // 使用顺序结构数组存储
     private E[] elements;
 
     /**
@@ -151,14 +151,14 @@ public class CircleDeque<E> {
     private int index(int index){
         index += front;
 
-        //但真实index为0时，往队头添加元素，传入 -1，小于0
+        // 但真实index为0时，往队头添加元素，传入 -1，小于0
         if (index < 0){
             index += elements.length;
         }
-        //return index % elements.length;
+        // return index % elements.length;
 
-        //优化模运算，因为index不会超过2倍elements.length，可以转成减法运算
-        //已知n>=0，m>0，n%m等价于n–(m > n ? 0 : m)的前提条件：n < 2m
+        // 优化模运算，因为index不会超过2倍elements.length，可以转成减法运算
+        // 已知n>=0，m>0，n%m等价于n–(m > n ? 0 : m)的前提条件：n < 2m
         return index - (index >= elements.length ? elements.length : 0);
     }
 
